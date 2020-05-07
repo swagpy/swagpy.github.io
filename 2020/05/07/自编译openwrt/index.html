@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>hello hexo | 当条咸鱼</title>
+  <title>自编译openwrt | 当条咸鱼</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog">
+  <meta name="description" content="环境准备">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello hexo">
-<meta property="og:url" content="http://yoursite.com/2020/03/25/hello-hexo/index.html">
+<meta property="og:title" content="自编译openwrt">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/index.html">
 <meta property="og:site_name" content="当条咸鱼">
-<meta property="og:description" content="我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog">
+<meta property="og:description" content="环境准备">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-25T08:24:26.000Z">
-<meta property="article:modified_time" content="2020-05-07T13:44:56.476Z">
+<meta property="article:published_time" content="2020-05-07T13:17:09.000Z">
+<meta property="article:modified_time" content="2020-05-07T13:38:26.698Z">
 <meta property="article:author" content="swaggy-pgy">
-<meta property="article:tag" content="hexo 搭建">
+<meta property="article:tag" content="咸鱼的博客">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="当条咸鱼" type="application/atom+xml">
@@ -151,35 +151,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-hexo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-自编译openwrt" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hello hexo
+      自编译openwrt
     </h1>
   
 
         
         
  
-<a href="/2020/03/25/hello-hexo/" class="archive-article-date">
-  	<time datetime="2020-03-25T08:24:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
+<a href="/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/" class="archive-article-date">
+  	<time datetime="2020-05-07T13:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog</p>
+        <p>环境准备</p>
 <a id="more"></a>
-<p>1.环境搭建<br>    1.下载node js<br>        nodejs.org<br>        进入上面的网站，下载LTS版本的NODE JS，然后一直确定下一步，安装完成<br>    npm包，先下cnpm包<br>        管理员打开CMD ，先查看NODEjs跟npm 是否下载好了，通过  node -v ;npm -v查看<br>        查看完了之后就是下载一个叫cnpm的东西，因为国内的npm太慢了在CMD里面敲 npm install -g cnpm –registry=<a href="https://registry.taobao.org" target="_blank" rel="noopener">https://registry.taobao.org</a> 这个指令来下载cnpm<br>    2.下载hexo框架<br>        在cnpm 下载完了之后 敲 cnpm install -g hexo-cli 来下载这个hexo框架。<br>2.创建文件夹<br>    1.创建空文件夹<br>        为什么要创建这个文件夹，这个文件夹是你blog的文件夹，如果blog初始化遇到了问题，直接删掉这个文件夹就可以了。<br>        注意这个文件夹是要跟刚刚下载完的这个框架在同一个文件目录下，如果你是在用户目录下下载的框架，那直接在那建文件夹，或者用cmd mkdir命令创建文件夹<br>    2.新建一个HEXO框架<br>        在CMD中进入blog ,也就是刚刚建的目录，然后输入 hexo init 命令来初始化这个Hexo框架，经过等待，初始化完成之后，博客初步搭建完成<br>        可以CMD通过hexo s 来预览你的blog.</p>
-<pre><code>3. 推送post 
-    hexo n 博文名字  表示新建博文，然后开始写博文
-    写完博文后，hexo g 重新生成一下；
-    通过hexo d 将你的post推送到服务器上，达到更新博文。</code></pre>
+<p>1.搭建linux环境<br>        我使用的是ubuntu 18.04LTS.（虚拟机或者物理机,当然物理机是最好的，但是对于我们这种学习为主的就是虚拟机，毕竟虚拟机出问题了重装系统或者虚拟机比较方便）。<br>2.编译环境的准备（依赖包的安装）<br>        打开terminal<br>        依次安装以下依赖包，前面都要加sudo 超级权限。（最好是逐条安装）这样可以知道哪个包安装不成功<br>        apt-get install g++<br>        apt-get install libncurses5-dev<br>        apt-get install zlib1g-dev<br>        apt-get install bison<br>        apt-get install flex<br>        apt-get install unzip<br>        apt-get install autoconf<br>        apt-get install gawk<br>        apt-get install make<br>        apt-get install gettext<br>        apt-get install gcc<br>        apt-get install binutils<br>        apt-get install patch<br>        apt-get install bzip2<br>        apt-get install libz-dev<br>        apt-get install asciidoc<br>        apt-get install subversion<br>        以上所有包安装完了之后就算完成编译环境的搭建。<br>3.    源码的下载<br>        3.1    官方源码下载：<br>        首先是创建文件夹放这个源码，下载完了之后先备份一下源码，之后就算安装除了什么问题我们都可以将整个文件夹直接rm –rf 。最多重新再来。Terminal 进入文件夹开始下载源码。<br>        下载源码，分两种，一种是最新版但不是最稳定，也就是trunk版，一种是相对稳定版，backfire版。源码下载命令分别是：<br>        Trunk版下载命令：svn co svn://svn.openwrt.org/openwrt/trunk/<br>        Backfire下载命令：svn co svn://svn.openwrt.org/openwrt/branches/backfire/<br>        选择你想要的版本就行了。然后又是等待下载…<br>        由于openwrt 下载比较慢，不知道可不可以去淘宝的镜像下，由于我家是全程科学上网，所以还算可以，科学上网在openwrt的编译工作中至关重要，下文再说。<br>        3.2    非官方下载<br>        由于我又特殊的需求，我就去Github上找到L大（Lean）的源码进行下载，lean 是国内在openwrt 上颇有声望的大神，他对常用的Lede(听说openwrt要改名LEDE不知道是不是真的)固件源码有很大的贡献。L大源码提供很多不可描述的package。所以我选择L大的源码。<br>        地址是<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">https://github.com/coolsnowwolf/lede</a><br>        说了这么多废话还是要下载源码，还是打开terminal 新建文件夹，进入文件夹，然后敲入命令 git clone  <a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">https://github.com/coolsnowwolf/lede</a><br>        如果提示没有git ，就  sudo apt-get install git ，再敲一次。这里第一个科学上网的问题就来了，GitHub上面是比较不稳定的，所以最好全程科学上网，加上不知道是虚拟机的问题还是Ubuntu的问题，网速超级低，且不稳定会下载失败。那么我这里虚拟机环境下我就选择了在物理机winndows环境下载，下载还是蛮好的，然后下载完了之后，就面临第二个问题，物理机跟虚拟机之间的通信，这里跑题一下分享几个方法1.如果虚拟机软件是VMware的话可以再虚拟机上面安装VMtool，然后就可以直接是拖拽过去；2.打开虚拟机设置，设置一个共享文件夹，然后拉到文件夹再拉到虚拟机；3.远程访问，将虚拟机设置允许远程访问，然后物理机打开winscp（可以用ftp，sftp协已传输文件的一个软件）远程登陆然后传输。我个人选用的是第一个方法。<br>        如果源码时zip格式的我们还需要sudo apt-get install zip 安装压缩解压缩。<br>        然后就unzip一下。Ok到这里就基本上下载源码完毕。<br>4.    开始编译<br>        注意在下载源码开始千万不要用root权限<br>        4.1：按照老师的PPT上所介绍的先升级软件包源码<br>                terminal进入源码文件夹 输入命令 ./scripts/feed update –a 跟 ./scripts/feeds install –a 更新源码跟安装源码。<br>        4.2：配置menuconfig<br>                Terminal 源码文件夹下输入make menuconfig 开始配置，主要是选择架构，跟主芯片。详细怎么选择就是根据实际情况来，我家的路由器就是 mips 架构的。芯片是MT7621。然后一般还要去LUCI—module 下选择中文。或者各位大佬可以在琢磨玩一下，可以选择编译不编译跟模块编译，区别就是像老师前两节课介绍的一样。<br>        4.3：下载依赖包<br>                不要以为下载完源码就可以直接编译了，第一次编译的时候，是需要其他的依赖包。我们还是terminal 源码文件夹下，输入 make –j8 download V=s  会自动下载相关的依赖包，注意这个步骤必须要网络不能卡顿，而且最好全程要科学上网，上文所说的科学上网的重要性在这体现出来。那也还有另一个方法，找到依赖包的清单，自己下载，然后打包到源码文件夹下新建文件夹dl， 即可完成这个步骤。<br>        这个步骤是十分重要的，有任何一个依赖包没有下载成功的话，后面编译的时候就会出现各种的error 导致编译不成功，为此我百度了好久，还以为是自己的问题，结果不得不整个文件夹删掉然后重新再来。Ok这是题外话了。<br>        4.4：开始编译（咖啡事件）<br>                下载完了相关的依赖包之后，我们就可以开始编译了，还是terminal 下进入源码文件夹，输入 make –j1 V=99或者V=s  注意V是大写 ，-j后面的数字表示进程数，第一次编译由于是第一次为了找问题方便一般是单进程进行，熟练之后就可以线程全开编译，然后就是漫长的王者时间。</p>
+
       
 
       
@@ -208,17 +205,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">hexo 搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -269,7 +255,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/25/hello-hexo/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,15 +269,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/03/26/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          神经网络训练
-        
-      </div>
-    </a>
   
+    <a href="/2020/03/26/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">神经网络训练</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
