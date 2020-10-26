@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread1.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/result.png">
 <meta property="article:published_time" content="2020-10-26T07:19:20.000Z">
-<meta property="article:modified_time" content="2020-10-26T08:54:31.341Z">
+<meta property="article:modified_time" content="2020-10-26T08:56:06.608Z">
 <meta property="article:author" content="swaggy-pgy">
 <meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary">
@@ -180,7 +180,7 @@
       
         <h2 id="1-进程与线程"><a href="#1-进程与线程" class="headerlink" title="1.进程与线程"></a>1.进程与线程</h2><a id="more"></a>
 
-<pre><code>进程，个人理解是操作系统为了处理并发程序而给每一个程序分配的标识符。</code></pre><p><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread.jpg" alt="thread"><br>那么线程呢是一个程序为了处离不同过程所分发的标识符。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread2.jpg" alt="thread2"><br>    比如说程序的GUI界面跟后端分离，达到了前端界面实时更新后端信息的效果。<br>那么进程 process跟线程thread 之间的区别，1.独立性，每一个进程分配的内存空间都是独立的，而线程share同一个线程的空间。2.开销，在我看来进程跟线程都能够处理并发，但是切换进程的开销比切换线程的开销大的多。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread1.png" alt="thread1"></p>
+<p>进程，个人理解是操作系统为了处理并发程序而给每一个程序分配的标识符。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread.jpg" alt="thread"><br>那么线程呢是一个程序为了处离不同过程所分发的标识符。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread2.jpg" alt="thread2"><br>比如说程序的GUI界面跟后端分离，达到了前端界面实时更新后端信息的效果。<br>那么进程 process跟线程thread 之间的区别，1.独立性，每一个进程分配的内存空间都是独立的，而线程share同一个线程的空间。2.开销，在我看来进程跟线程都能够处理并发，但是切换进程的开销比切换线程的开销大的多。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread1.png" alt="thread1"></p>
 <h2 id="2-线程的创建"><a href="#2-线程的创建" class="headerlink" title="2.线程的创建"></a>2.线程的创建</h2><p>我这里使用的是VS2019，是支持了C++11语法。使用线程相关的函数需要包含“thread”头文件<br>下面写一些创建线程的一些方法吧：</p>
 <pre><code>#include &lt;iostream&gt;
 #include &lt;thread&gt;
