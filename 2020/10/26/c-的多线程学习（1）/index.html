@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>hello hexo | 当条咸鱼</title>
+  <title>c++的多线程学习（1） | 当条咸鱼</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog">
+  <meta name="description" content="1.进程与线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello hexo">
-<meta property="og:url" content="http://yoursite.com/2020/03/25/hello-hexo/index.html">
+<meta property="og:title" content="c++的多线程学习（1）">
+<meta property="og:url" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="当条咸鱼">
-<meta property="og:description" content="我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog">
+<meta property="og:description" content="1.进程与线程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-25T08:24:26.000Z">
-<meta property="article:modified_time" content="2020-10-26T08:49:33.420Z">
+<meta property="og:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread1.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/result.png">
+<meta property="article:published_time" content="2020-10-26T07:19:20.000Z">
+<meta property="article:modified_time" content="2020-10-26T08:45:55.811Z">
 <meta property="article:author" content="swaggy-pgy">
-<meta property="article:tag" content="hexo 搭建">
+<meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread.jpg">
   
     <link rel="alternative" href="/atom.xml" title="当条咸鱼" type="application/atom+xml">
   
@@ -151,35 +156,89 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-hexo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c-的多线程学习（1）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hello hexo
+      c++的多线程学习（1）
     </h1>
   
 
         
         
  
-<a href="/2020/03/25/hello-hexo/" class="archive-article-date">
-  	<time datetime="2020-03-25T08:24:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
+<a href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2020-10-26T07:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog</p>
-<a id="more"></a>
-<p>1.环境搭建<br>    1.下载node js<br>    nodejs.org<br>    进入上面的网站，下载LTS版本的NODE JS，然后一直确定下一步，安装完成<br>    npm包，先下cnpm包<br>    管理员打开CMD ，先查看NODEjs跟npm 是否下载好了，通过  node -v ;npm -v查看<br>    查看完了之后就是下载一个叫cnpm的东西，因为国内的npm太慢了在CMD里面敲 npm install -g cnpm –registry=<a href="https://registry.taobao.org" target="_blank" rel="noopener">https://registry.taobao.org</a> 这个指令来下载cnpm<br>    2.下载hexo框架<br>    在cnpm 下载完了之后 敲 cnpm install -g hexo-cli 来下载这个hexo框架。<br>2.创建文件夹<br>    1.创建空文件夹<br>    为什么要创建这个文件夹，这个文件夹是你blog的文件夹，如果blog初始化遇到了问题，直接删掉这个文件夹就可以了。<br>    注意这个文件夹是要跟刚刚下载完的这个框架在同一个文件目录下，如果你是在用户目录下下载的框架，那直接在那建文件夹，或者用cmd mkdir命令创建文件夹<br>    2.新建一个HEXO框架<br>    在CMD中进入blog ,也就是刚刚建的目录，然后输入 hexo init 命令来初始化这个Hexo框架，经过等待，初始化完成之后，博客初步搭建完成<br>    可以CMD通过hexo s 来预览你的blog.</p>
-<pre><code>3. 推送post 
-hexo n 博文名字  表示新建博文，然后开始写博文
-写完博文后，hexo g 重新生成一下；
-通过hexo d 将你的post推送到服务器上，达到更新博文。</code></pre>
+        <h2 id="1-进程与线程"><a href="#1-进程与线程" class="headerlink" title="1.进程与线程"></a>1.进程与线程</h2><a id="more"></a>
+
+<pre><code>进程，个人理解是操作系统为了处理并发程序而给每一个程序分配的标识符。</code></pre><p><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread.jpg" alt="thread"><br>那么线程呢是一个程序为了处离不同过程所分发的标识符。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread2.jpg" alt="thread2"><br>    比如说程序的GUI界面跟后端分离，达到了前端界面实时更新后端信息的效果。<br>那么进程 process跟线程thread 之间的区别，1.独立性，每一个进程分配的内存空间都是独立的，而线程share同一个线程的空间。2.开销，在我看来进程跟线程都能够处理并发，但是切换进程的开销比切换线程的开销大的多。<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/thread1.png" alt="thread1"></p>
+<h2 id="2-线程的创建"><a href="#2-线程的创建" class="headerlink" title="2.线程的创建"></a>2.线程的创建</h2><pre><code>我这里使用的是VS2019，是支持了C++11语法。使用线程相关的函数需要包含“thread”头文件</code></pre><p>下面写一些创建线程的一些方法吧：</p>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;thread&gt;
+using namespace std;
+void fun1()
+{
+    cout &lt;&lt; &quot;this is fun1&quot; &lt;&lt; endl;
+}
+
+class ADD
+{
+public:
+    ADD() {};
+    ~ADD() {};
+    void operator()(int a, int b)
+    {
+        cout &lt;&lt; &quot;add func show the result:  &quot; &lt;&lt; a &lt;&lt; &quot; + &quot; &lt;&lt; b &lt;&lt; &quot;  is : &quot; &lt;&lt; (a + b) &lt;&lt; endl;
+    }
+    void operator()()
+    {
+        cout &lt;&lt; &quot;none of params in this function&quot; &lt;&lt; endl;
+    }
+
+private:
+
+};
+void add(int a, int b)
+{
+    cout &lt;&lt;&quot;func pointer add result is : &quot; &lt;&lt;a + b &lt;&lt; endl;
+}
+
+
+int main()
+{
+    void(*fun)(int, int);
+    fun = &amp;add;
+    ADD a1;
+    thread t1=thread (ADD(),2,3);
+    thread t2 = thread(fun, 2,5);//equal that thead(add,2,3)
+    thread t3 = thread(a1);
+    thread t4 = thread([](int a, int b) 
+    {
+        cout &lt;&lt; &quot;this is lambda to create a thread the result is : &quot; &lt;&lt; a + b &lt;&lt; endl;
+    },8,2);
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+    cout &lt;&lt; &quot;this is main thread&quot; &lt;&lt; endl;
+    system(&quot;pause&quot;);
+    return 0;
+
+}</code></pre><p>如上面代码所显示呢我这里是使用了两种方法来创建线程，首先是使用函数指针来实现线程的创建，我首先定义了一个函数指针<code>func</code> ,使得<code>func</code> 指向函数<code>add</code>。然后再实例化这个线程对象<code>t2</code>，注意实例化的时候不需要加<code>()</code>而且使用<code>,</code>传参。</p>
+<p><code>t1</code>还有<code>t3</code>都是使用类对象来创建线程的，他们的区别是：<code>t1</code>我的理解是在堆区创建了临时对象，所以要加<code>()</code>，而<code>t3</code>是在栈区里面实例化一个对象，实例化对象的时候记得这时候就要传参进去，也就是要编写带参数的构造函数，再去创建线程。</p>
+<p><code>t4</code>是使用了lambda表达式来创建线程对象。</p>
+<p>创建完对象之后需要将这些线程join 一下，达到对线程的控制。这里加入线程有两种方法，分别是Join 方法跟detach 方法。join 方法调用之后仍然拥有线程的控制权，但是detach方法调用完了之后是失去了线程的控制权，不再关心线程的运行状况。</p>
+<p>下面是运行结果:<br><img src="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/result.png" alt></p>
+
       
 
       
@@ -213,7 +272,7 @@ hexo n 博文名字  表示新建博文，然后开始写博文
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">hexo 搭建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
         		</li>
       		
 		</ul>
@@ -269,7 +328,7 @@ hexo n 博文名字  表示新建博文，然后开始写博文
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/25/hello-hexo/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,15 +342,11 @@ hexo n 博文名字  表示新建博文，然后开始写博文
   
 <nav id="article-nav">
   
-    <a href="/2020/03/26/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          神经网络训练
-        
-      </div>
-    </a>
   
+    <a href="/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">自编译openwrt</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
