@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/10 | 当条咸鱼</title>
+  <title>c++的多线程学习（2） | 当条咸鱼</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="计算机在读咸鱼的学习日记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="当条咸鱼">
-<meta property="og:url" content="http://yoursite.com/archives/2020/10/index.html">
+  <meta name="description" content="多线程的效率提升">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++的多线程学习（2）">
+<meta property="og:url" content="http://yoursite.com/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/index.html">
 <meta property="og:site_name" content="当条咸鱼">
-<meta property="og:description" content="计算机在读咸鱼的学习日记">
+<meta property="og:description" content="多线程的效率提升">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/3.png">
+<meta property="article:published_time" content="2020-10-27T06:50:13.000Z">
+<meta property="article:modified_time" content="2020-10-27T10:28:35.628Z">
 <meta property="article:author" content="swaggy-pgy">
-<meta property="article:tag" content="咸鱼的博客">
+<meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/1.png">
   
     <link rel="alternative" href="/atom.xml" title="当条咸鱼" type="application/atom+xml">
   
@@ -143,38 +149,117 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article  id="post-c-的多线程学习（2）" class="articlebg" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      c++的多线程学习（2）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+
+        
+        
  
 <a href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" class="archive-article-date">
   	<time datetime="2020-10-27T06:50:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">c++的多线程学习（2）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="多线程的效率提升"><a href="#多线程的效率提升" class="headerlink" title="多线程的效率提升"></a>多线程的效率提升</h2><a id="more"></a>
+<p>　　昨天我们介绍了多线程的简单定义及使用方法，那么为什么需要多线程呢，多线程能给我们带来多大的提升呢，接下来我今天的blog主题就是探讨一下多线程对于我们的程序运行带来什么提升。</p>
+<h3 id="时间衡量"><a href="#时间衡量" class="headerlink" title="时间衡量"></a>时间衡量</h3><p>　　对于一个程序我们最直接的测量就是测量程序的运行时间。所以我们先首先定义一个测量时间标准的准则。</p>
+<pre><code>template &lt;typename T&gt;
+void messure(T &amp;&amp; func)//&amp;&amp;是c++11 的特性，右值引用，目的是减少复制。
+{
+    using namespace std::chrono;
+    auto start_time = system_clock::now();
+    func();
+    auto func_time = system_clock::now() - start_time;
+    cout &lt;&lt; &quot;func finished time is :&quot; &lt;&lt; func_time.count() &lt;&lt; &quot;  us&quot; &lt;&lt; endl;
 
-        <div class="article-info info-on-right">
-          
+}</code></pre><p>　　以上这个是十分简单的测量时间准则的函数,就是将函数完成前后的两个时间差进行相减,达到了模拟函数运行时间的测量．<br>然后我利用简单的求和函数来测试一下多线程的效果.代码如下:</p>
+<pre><code>void sum(long long  start, long long end, long long&amp; ans)
+{
+    long long s = 0;
+    for (long long  i = start; i &lt; end; i++)
+    {
+        s += i;
+    }
+
+    ans = s;
+}
+
+
+int main()
+{
+
+    // 这里测量函数运行时间呢我们使用messure方法，然后载体呢就是一个lambda 函数
+    messure([]() {
+        long long  ans1 = 0, ans2 = 0,ans = 0;
+        long long  start = 0, end = 400000000;
+        thread t1 = thread(sum, start, end/2, std::ref(ans1));
+        thread t2 = thread(sum, end/2, end, std::ref(ans2));
+        t1.join();
+        t2.join();
+        ans = ans1 + ans2;
+        cout &lt;&lt; &quot;the total ans is : &quot; &lt;&lt; ans &lt;&lt; endl;
+
+    });
+    messure([]() {
+        long long ans = 0;
+        long long  start = 0, end = 400000000;
+        sum(start, end, ans);
+        cout &lt;&lt; &quot;the total ans is : &quot; &lt;&lt; ans &lt;&lt; endl;
+    });
+
+
+    system(&quot;pause&quot;);
+    return 0;
+
+}</code></pre><p>　　以上这段代码,定义了一个sum函数.然后在main函数里面利用了lambda表达式,写了这个求和的过程.第一段messure我将求和区间割裂成两段,然后创建两个线程对象,最后将得到的结果相加.第二个messure 直接粗暴的将整个区间求和.效果如下:<br><img src="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/1.png" alt><br>　　其实对于这个效果我认为不是十分的理想的,两个过程的时间相差没有想象中的那么大.或者是由于测试数据没有达到理想的测试效果.这里我用的是4亿,但是我测试过40亿其实时间的比例还是差不多.而且,随着数据的减少.单线程的反而是有优势了,例如4百万,4万.<br><img src="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/2.png" alt><br><img src="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/3.png" alt><br>　　这就抛出了一个有意思的问题,多线程一定比单线程快吗?</p>
+<h2 id="影响多线程的因素"><a href="#影响多线程的因素" class="headerlink" title="影响多线程的因素"></a>影响多线程的因素</h2><p>　　首先分配cpu资源的单位是进程。一个进程所获得到的cpu资源是一定的。程序在执行的过程中消耗的是cpu，比如一个单核cpu，多个线程同时执行工作时，需要不断切换执行(上下文切换)，单个线程时间耗费更多了，而单线程只是一个线程跑。<br>比如：<br>    处理10个报表，<br>    在单线程的情况下，假如说我们生成10个报表文件需要1个小时。<br>    单线程是先执行完第一个报表，用了6分钟，再执行第二个报表，也用6分钟。总计1个小时<br>    多线程，是10个报表一起执行，但是每一个报表都要1个小时。<br>    总结：多线程的总体执行时间和单线程是一样的，但是多线程中单个线程的执行时间是单线程的多倍。<br>    多线程提高的是并发数量，比如现在有一个4核cpu的服务器，同一时间可执行4个线程，这样处理线程任务的速度比较快。但是多出来的线程，5个，6个，7个，多出的线程还是要等待。</p>
+<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p>　　多线程编程中一般线程的个数都大于 CPU 核心的个数，而一个 CPU 核心在任意时刻只能被一个线程使用，为了让这些线程都能得到有效执行，CPU 采取的策略是为每个线程分配时间片并轮转的形式。当一个线程的时间片用完的时候就会重新处于就绪状态让给其他线程使用，这个过程就属于一次上下文切换。</p>
+<p>　　概括来说就是：当前任务在执行完 CPU 时间片切换到另一个任务之前会先保存自己的状态，以便下次再切换会这个任务时，可以再加载这个任务的状态。任务从保存到再加载的过程就是一次上下文切换。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zfb.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,59 +271,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
- 
-<a href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-10-26T07:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++的多线程学习（1）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">c++的多线程学习（1）</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -263,8 +395,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
