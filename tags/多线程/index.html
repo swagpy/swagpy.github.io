@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>自编译openwrt | 当条咸鱼</title>
+  <title>Tag: 多线程 | 当条咸鱼</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="环境准备">
-<meta property="og:type" content="article">
-<meta property="og:title" content="自编译openwrt">
-<meta property="og:url" content="http://yoursite.com/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/index.html">
+  <meta name="description" content="计算机在读咸鱼的学习日记">
+<meta property="og:type" content="website">
+<meta property="og:title" content="当条咸鱼">
+<meta property="og:url" content="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="当条咸鱼">
-<meta property="og:description" content="环境准备">
+<meta property="og:description" content="计算机在读咸鱼的学习日记">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-07T13:17:09.000Z">
-<meta property="article:modified_time" content="2020-10-26T15:40:07.375Z">
 <meta property="article:author" content="swaggy-pgy">
-<meta property="article:tag" content="openwrt">
+<meta property="article:tag" content="咸鱼的博客">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="当条咸鱼" type="application/atom+xml">
@@ -145,184 +143,154 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article  id="post-自编译openwrt" class="articlebg" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      自编译openwrt
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+ 
+<a href="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2020-10-28T03:05:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/">c++的多线程学习（3）</a>
     </h1>
   
 
-        
-        
- 
-<a href="/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/" class="archive-article-date">
-  	<time datetime="2020-05-07T13:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><a id="more"></a>
-<p>1.搭建linux环境<br>        　　我使用的是ubuntu 18.04LTS.（虚拟机或者物理机,当然物理机是最好的，但是对于我们这种学习为主的就是虚拟机，毕竟虚拟机出问题了重装系统或者虚拟机比较方便）。<br>2.编译环境的准备（依赖包的安装）<br>        　　打开terminal<br>        　　依次安装以下依赖包，前面都要加sudo 超级权限。（最好是逐条安装）这样可以知道哪个包安装不成功<br>        apt-get install g++<br>        apt-get install libncurses5-dev<br>        apt-get install zlib1g-dev<br>        apt-get install bison<br>        apt-get install flex<br>        apt-get install unzip<br>        apt-get install autoconf<br>        apt-get install gawk<br>        apt-get install make<br>        apt-get install gettext<br>        apt-get install gcc<br>        apt-get install binutils<br>        apt-get install patch<br>        apt-get install bzip2<br>        apt-get install libz-dev<br>        apt-get install asciidoc<br>        apt-get install subversion<br>        以上所有包安装完了之后就算完成编译环境的搭建。<br>3.    源码的下载<br>        3.1    官方源码下载：<br>        　　首先是创建文件夹放这个源码，下载完了之后先备份一下源码，之后就算安装除了什么问题我们都可以将整个文件夹直接rm –rf 。最多重新再来。Terminal 进入文件夹开始下载源码。<br>        下载源码，分两种，一种是最新版但不是最稳定，也就是trunk版，一种是相对稳定版，backfire版。源码下载命令分别是：<br>        　　　　　　　　　　Trunk版下载命令：svn co svn://svn.openwrt.org/openwrt/trunk/<br>        　　　　　　　　　　Backfire下载命令：svn co svn://svn.openwrt.org/openwrt/branches/backfire/<br>        　　选择你想要的版本就行了。然后又是等待下载…<br>        　　由于openwrt 下载比较慢，不知道可不可以去淘宝的镜像下，由于我家是全程科学上网，所以还算可以，科学上网在openwrt的编译工作中至关重要，下文再说。<br>        3.2    非官方下载<br>        　　由于我有特殊的需求，我就去Github上找到L大（Lean）的源码进行下载，lean 是国内在openwrt 上颇有声望的大神，他对常用的Lede(听说openwrt要改名LEDE不知道是不是真的)固件源码有很大的贡献。L大源码提供很多不可描述的package。所以我选择L大的源码。<br>        地址是<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">https://github.com/coolsnowwolf/lede</a><br>        说了这么多废话还是要下载源码，还是打开terminal 新建文件夹，进入文件夹，然后敲入命令 git clone  <a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">https://github.com/coolsnowwolf/lede</a><br>        　　如果提示没有git ，就  sudo apt-get install git ，再敲一次。这里第一个科学上网的问题就来了，GitHub上面是比较不稳定的，所以最好全程科学上网，加上不知道是虚拟机的问题还是Ubuntu的问题，网速超级低，且不稳定会下载失败。那么我这里虚拟机环境下我就选择了在物理机winndows环境下载，下载还是蛮好的，然后下载完了之后，就面临第二个问题，物理机跟虚拟机之间的通信，这里跑题一下分享几个方法1.如果虚拟机软件是VMware的话可以再虚拟机上面安装VMtool，然后就可以直接是拖拽过去；2.打开虚拟机设置，设置一个共享文件夹，然后拉到文件夹再拉到虚拟机；3.远程访问，将虚拟机设置允许远程访问，然后物理机打开winscp（可以用ftp，sftp协已传输文件的一个软件）远程登陆然后传输。我个人选用的是第一个方法。<br>          如果源码时zip格式的我们还需要sudo apt-get install zip 安装压缩解压缩。<br>          然后就unzip一下。Ok到这里就基本上下载源码完毕。<br>4.    开始编译<br>          注意在下载源码开始千万不要用root权限<br>        4.1：按照老师的PPT上所介绍的先升级软件包源码<br>                  terminal进入源码文件夹 输入命令 ./scripts/feed update –a 跟 ./scripts/feeds install –a 更新源码跟安装源码。<br>        4.2：配置menuconfig<br>                  Terminal 源码文件夹下输入make menuconfig 开始配置，主要是选择架构，跟主芯片。详细怎么选择就是根据实际情况来，我家的路由器就是 mips 架构的。芯片是MT7621。然后一般还要去LUCI—module 下选择中文。或者各位大佬可以在琢磨玩一下，可以选择编译不编译跟模块编译，区别就是像老师前两节课介绍的一样。<br>        4.3：下载依赖包<br>                  不要以为下载完源码就可以直接编译了，第一次编译的时候，是需要其他的依赖包。我们还是terminal 源码文件夹下，输入 make –j8 download V=s  会自动下载相关的依赖包，注意这个步骤必须要网络不能卡顿，而且最好全程要科学上网，上文所说的科学上网的重要性在这体现出来。那也还有另一个方法，找到依赖包的清单，自己下载，然后打包到源码文件夹下新建文件夹dl， 即可完成这个步骤。<br>            这个步骤是十分重要的，有任何一个依赖包没有下载成功的话，后面编译的时候就会出现各种的error 导致编译不成功，为此我百度了好久，还以为是自己的问题，结果不得不整个文件夹删掉然后重新再来。Ok这是题外话了。<br>        4.4：开始编译（咖啡事件）<br>                 下载完了相关的依赖包之后，我们就可以开始编译了，还是terminal 下进入源码文件夹，输入 make –j1 V=99或者V=s  注意V是大写 ，-j后面的数字表示进程数，第一次编译由于是第一次为了找问题方便一般是单进程进行，熟练之后就可以线程全开编译，然后就是漫长的王者时间。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/zfb.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">openwrt</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/07/%E8%87%AA%E7%BC%96%E8%AF%91openwrt/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          c++的多线程学习（1）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/03/26/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">神经网络训练</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+ 
+<a href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2020-10-27T06:50:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-27</time>
+</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
+    	 
   
-  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">c++的多线程学习（2）</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+ 
+<a href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2020-10-26T07:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-26</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">c++的多线程学习（1）</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
   
 
-  
+    
 
 
           </div>
@@ -347,9 +315,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
