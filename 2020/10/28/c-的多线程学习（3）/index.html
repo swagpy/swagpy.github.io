@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: cpp | 当条咸鱼</title>
+  <title>c++的多线程学习（3） | 当条咸鱼</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="计算机在读咸鱼的学习日记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="当条咸鱼">
-<meta property="og:url" content="http://yoursite.com/tags/cpp/index.html">
+  <meta name="description" content="为什么需要锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++的多线程学习（3）">
+<meta property="og:url" content="http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/index.html">
 <meta property="og:site_name" content="当条咸鱼">
-<meta property="og:description" content="计算机在读咸鱼的学习日记">
+<meta property="og:description" content="为什么需要锁">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/4.png">
+<meta property="article:published_time" content="2020-10-28T03:05:18.000Z">
+<meta property="article:modified_time" content="2020-10-28T07:44:56.201Z">
 <meta property="article:author" content="swaggy-pgy">
-<meta property="article:tag" content="咸鱼的博客">
+<meta property="article:tag" content="cpp">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/2.png">
   
     <link rel="alternative" href="/atom.xml" title="当条咸鱼" type="application/atom+xml">
   
@@ -143,38 +150,131 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article  id="post-c-的多线程学习（3）" class="articlebg" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      c++的多线程学习（3）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+
+        
+        
  
 <a href="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" class="archive-article-date">
   	<time datetime="2020-10-28T03:05:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/">c++的多线程学习（3）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么需要锁"><a href="#为什么需要锁" class="headerlink" title="为什么需要锁"></a>为什么需要锁</h2><a id="more"></a>
+<p>　　在学习日记（1）中的最后，介绍了几种创建线程的方式，并且运行实例，但是观察了实例的运行截图后发现，其实跟预想的输出还是有差别的，虽然都完整的输出了想要的结果，但是会发现在这个界面里其实输出的结果是杂乱无章的。这是因为在切换线程之后，这几个线程都访问了<code>cout</code>这个输出流对象，输出流对象并不会有这个过滤机制来分别是那个线程的输出，所以会显得杂乱无章，在这个过程里面，输出流对象<code>cout</code>就是我们的公共资源。<br>　　那么我们对这个<code>cout</code>上锁，应该就会变成正常情况。<br>定义互斥量，需要包含头文件 <code>mutex</code> ，然后定义一个互斥量：</p>
+<pre><code>mutex cout_mtx;</code></pre><p>　　关于这个互斥量呢，其实就是锁的一种实现方式，也可以自己定义一个全局变量 <code>bool flag</code> 来实现。其目的是在每一个线程在使用 <code>cout</code> 流对象的时候，就算线程进行了切换，也不会失去对 <code>cout</code> 的控制权，直到使用结束，开锁，供其他的程序所使用。具体的实例如下：</p>
+<pre><code>void fun1()
+{
+    cout_mtx.lock();
+    cout &lt;&lt; &quot;this is fun1&quot; &lt;&lt; endl;
+    cout_mtx.unlock();
+}</code></pre><p>　　对于（1）中创建线程的实例进行改造的话，经过改造之后，我们的结果就是正常的。<br><img src="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/2.png" alt><br>　　在这里呢，再次提醒一下 <code>join</code> 跟 <code>detach</code> 的区别，如果对于线程使用了 <code>join</code> ，那么这个线程会阻塞主线程，保证了子线程运行完成之后，主线程再结束。｀detach｀并不会阻塞主线程，即便主线程提前结束了，子线程还是会继续运行，直到结束。这里想表达的意思是什么呢，就是当你看到下面的运行结果的时候，不会感到惊讶。</p>
+<p><img src="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/3.png" alt></p>
+<h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>　　ok,我们现在知道可以用 <code>mutex</code> 定义变量来实现上锁解锁这么一个功能，那么就探讨一下背后的一些源码，看看有什么玄机。<br><img src="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/1.png" alt><br>　　这里可以看到这个 <code>mutex</code> 是一个对象，因为它有方法调用。而且成员方法不多，分别是 lock() 、 unlock()、try_lock()、native_handle()、还有一个析构函数。<br><img src="/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/4.png" alt></p>
+<p>　　可以看到这个 <code>mutex</code> 是 <code>public</code> (公有继承) 这个 <code>_Mutex_base</code> 类的，所以主要的几种方法都在<code>_Mutex_base</code> 中实现。</p>
+<pre><code>class _Mutex_base
+    {    // base class for all mutex types
+public:
+    _Mutex_base(int _Flags = 0) noexcept
+        {    // construct with _Flags
+        _Mtx_init_in_situ(_Mymtx(), _Flags | _Mtx_try);
+        }
 
-        <div class="article-info info-on-right">
-          
+    ~_Mutex_base() noexcept
+        {    // clean up
+        _Mtx_destroy_in_situ(_Mymtx());
+        }
+
+    _Mutex_base(const _Mutex_base&amp;) = delete;
+    _Mutex_base&amp; operator=(const _Mutex_base&amp;) = delete;
+
+    void lock()
+        {    // lock the mutex
+        _Mtx_lockX(_Mymtx());
+        }
+
+    _NODISCARD bool try_lock()
+        {    // try to lock the mutex
+        return (_Mtx_trylockX(_Mymtx()) == _Thrd_success);
+        }
+
+    void unlock()
+        {    // unlock the mutex
+        _Mtx_unlockX(_Mymtx());
+        }
+
+    typedef void *native_handle_type;
+
+    _NODISCARD native_handle_type native_handle()
+        {    // return Concurrency::critical_section * as void *
+        return (_Mtx_getconcrtcs(_Mymtx()));
+        }
+
+private:
+    friend condition_variable;
+    friend condition_variable_any;
+
+    aligned_storage_t&lt;_Mtx_internal_imp_size,
+        _Mtx_internal_imp_alignment&gt; _Mtx_storage;
+
+    _Mtx_t _Mymtx() noexcept
+        {    // get pointer to _Mtx_internal_imp_t inside _Mtx_storage
+        return (reinterpret_cast&lt;_Mtx_t&gt;(&amp;_Mtx_storage));
+        }
+    };</code></pre><p>　　简单介绍一下这个源码的一些方法，首先我们发现没有复制构造函数跟赋值运算符<code>=</code>的重载，这表明mutex不支持复制，实例化的时候直接初始化为 <code>unlocked</code> 状态；<br>　　然后就是成员方法，<code>lock</code> 与 <code>unlock</code> ,通过调用这两个方法，改变互斥锁的状态，达到让线程对象控制相关资源。<br>　　<code>try_lock</code>方法也是一个上锁的方法，为什么单独说呢，因为它有返回值，所以值得。try_lock()返回一个 bool 值，这个值是用来判断的。<br>关于try_lock():</p>
+<pre><code>1.如果互斥锁当前未被任何线程锁定，则调用线程将其锁定（从此点开始，直到调用其成员解锁，该线程拥有互斥锁）。
+2.如果互斥锁当前被另一个线程锁定，则该函数将失败并返回false，而不会阻塞（调用线程继续执行）。
+3.如果互斥锁当前被调用此函数的同一线程锁定，则会产生死锁（具有未定义的行为）。 请参阅recursive_mutex以获取允许来自同一线程的多个锁的互斥锁类型。</code></pre><p>这是一个blog 介绍的一些关于try_lock 的一些理解。这个跟lock不一样的是，try_lock 如果检测到已经被其他线程上锁了，那么就不会等待，而 lock() 方法会进行等待，那如果是同一个线程前面已经调用了lock（）方法，然后在后面再次调用了 try_lock 方法的话，会产生 <code>死锁</code> 。<br>　　<code>native_handle</code> 这个方法有一段英文介绍，我放下面：</p>
+<pre><code>native_handle_type native_handle();
+Get native handle
+This member function is only present in class mutex if the library implementation supports it.
+If present, it returns a value used to access implementation-specific information associated to the object.</code></pre><p>　　这段大概的意思就是，如果库函数有相关的实现支持的话，这个方法只有在mutex里面有效。如果有效的话，调用这个方法，会返回一个值，这个值是用来取关于这个对象的具体实现信息（也就是根据操作系统来返回具体的一个句柄。） 所以才命名为handle。 那么这个方法呢其实刚接触，用的还是比较少，看看以后有什么更加深入的一些应用吧。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zfb.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -186,99 +286,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/10/28/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%883%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
- 
-<a href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-10-27T06:50:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++的多线程学习（2）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/27/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89/">c++的多线程学习（2）</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
- 
-<a href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-10-26T07:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/26/c-%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">c++的多线程学习（1）</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">cpp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -303,9 +410,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
