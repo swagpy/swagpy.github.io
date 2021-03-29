@@ -16,7 +16,7 @@
 <meta property="og:description" content="我是swagpy,这是我的第一篇博客，介绍如何用hexo框架搭建一个新的blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-25T08:24:26.000Z">
-<meta property="article:modified_time" content="2020-10-26T15:33:15.986Z">
+<meta property="article:modified_time" content="2021-03-29T14:26:09.449Z">
 <meta property="article:author" content="swaggy-pgy">
 <meta property="article:tag" content="hexo 搭建">
 <meta name="twitter:card" content="summary">
@@ -174,7 +174,8 @@
 <pre><code>3. 推送post 
 　hexo n 博文名字  表示新建博文，然后开始写博文
 写完博文后，hexo g 重新生成一下；
-通过hexo d 将你的post推送到服务器上，达到更新博文。</code></pre>
+通过hexo d 将你的post推送到服务器上，达到更新博文。</code></pre><p>3.编辑技巧<br>    markdown编辑是不能直接添加空格的,有两种方法:<br>        1.手动输入空格 （&amp;nbsp；）。注意！此时的分号为英文分号，但是不推荐使用此方法，太麻烦！<br>        2.使用全角空格 即：在全角输入状态下直接使用空格键就ok了<br>    2.添加标记<br>        对于给关键词添加标记,英文状态下按 <code>~</code>键包裹要标记的关键词即可.<br>    3. markdown添加图片<br>        ！［］（）<br>        注意都是英文半角状态下的,()内是图片的地址,可以填网址,表示网络中的图片;也可以填路径,表示在本地文件,是相对路径;也可以把图片转化成base64 格式:<br>        “！［］（str64）”<br>        ［str64］:imgdata…<br>        需要将图片转化成base64 格式,比较麻烦.<br>        我使用的是第二种方式,安装了一个hexo的插件,在新建blog 的同时,新建一个同名文件夹.用于存放图片,直接用相对路径即可.<br>        这个插件安装如下:<br>        npm install hexo-asset-image –save<br>        安装完毕后打开config.yml文件,将修改为 post_asset_folder: true,改成true<br>        在新建博文时就可以看到post文件夹下有一个同名文件夹,即成功!</p>
+
       
 
       
@@ -332,7 +333,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 swaggy-pgy
+    		&copy; 2021 swaggy-pgy
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -435,6 +436,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">-个人日志</a>
               </li>
             
             <div class="clearfix"></div>
